@@ -13,6 +13,7 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
+import { Link } from "expo-router";
 
 const category = [
     {
@@ -30,7 +31,7 @@ const category = [
     {
         id: 3,
         name: "jewelery",
-        slug: "Jewelry",
+        slug: "jewelery",
         full_path: require("../../assets/images/jewelry.png"),
     },
     {
@@ -132,10 +133,15 @@ export default function HomeScreen() {
                     ]}
                 >
                     {category?.map((item) => (
-                        <View key={item?.id} style={styles.categoryCard}>
-                            <Image style={{ height: "100%", width: 70 }} source={item?.full_path} />
-                            <Text style={styles.productText}>{item?.name}</Text>
-                        </View>
+                        <Link key={item?.id} href={`/productCategory/${item.slug}`}>
+                            <View style={styles.categoryCard}>
+                                <Image
+                                    style={{ height: "100%", width: 70 }}
+                                    source={item?.full_path}
+                                />
+                                <Text style={styles.productText}>{item?.name}</Text>
+                            </View>
+                        </Link>
                     ))}
                 </View>
 
