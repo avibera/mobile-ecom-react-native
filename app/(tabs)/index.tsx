@@ -8,6 +8,7 @@ import {
     Text,
     TextInput,
     Dimensions,
+    ScrollView,
 } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useSharedValue } from "react-native-reanimated";
@@ -84,105 +85,111 @@ export default function HomeScreen() {
     }, []);
     return (
         <SafeAreaView>
-            {/* Header */}
-            <View style={styles.header}>
-                <View>
-                    <Text style={{ fontSize: 14, fontWeight: "bold", color: "#F66A83" }}>
-                        MobileEcom
-                    </Text>
-                    <View style={styles.normalFlex}>
-                        <Text
-                            style={{ fontSize: 16, fontWeight: "semibold", flexDirection: "row" }}
-                        >
-                            Kohat Enclave, building No. 370
+            <ScrollView>
+                {/* Header */}
+                <View style={styles.header}>
+                    <View>
+                        <Text style={{ fontSize: 14, fontWeight: "bold", color: "#F66A83" }}>
+                            MobileEcom
                         </Text>
-                        <FontAwesome name="map-marker" size={19} color="#F66A83" />
+                        <View style={styles.normalFlex}>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    fontWeight: "semibold",
+                                    flexDirection: "row",
+                                }}
+                            >
+                                Kohat Enclave, building No. 370
+                            </Text>
+                            <FontAwesome name="map-marker" size={19} color="#F66A83" />
+                        </View>
                     </View>
+                    <FontAwesome name="user" size={24} color="black" />
                 </View>
-                <FontAwesome name="user" size={24} color="black" />
-            </View>
 
-            {/* Search Section */}
-            <View style={{ paddingHorizontal: 12, paddingVertical: 14, position: "relative" }}>
-                <TextInput style={styles.search} placeholder="Search your items" />
-                <FontAwesome
-                    name="search"
-                    size={18}
-                    color="grey"
-                    style={{ position: "absolute", left: 25, top: 28 }}
-                />
-            </View>
+                {/* Search Section */}
+                <View style={{ paddingHorizontal: 12, paddingVertical: 14, position: "relative" }}>
+                    <TextInput style={styles.search} placeholder="Search your items" />
+                    <FontAwesome
+                        name="search"
+                        size={18}
+                        color="grey"
+                        style={{ position: "absolute", left: 25, top: 28 }}
+                    />
+                </View>
 
-            {/* Categories */}
-            <View
-                style={[
-                    styles.normalFlex,
-                    {
-                        paddingHorizontal: 12,
-                        gap: 30,
-                        marginHorizontal: "auto",
-                        marginVertical: 14,
-                    },
-                ]}
-            >
-                {category?.map((item) => (
-                    <View key={item?.id} style={styles.categoryCard}>
-                        <Image style={{ height: "100%", width: 70 }} source={item?.full_path} />
-                        <Text style={styles.productText}>{item?.name}</Text>
-                    </View>
-                ))}
-            </View>
-
-            {/* Carousels Banner */}
-            <View style={{ paddingVertical: 18 }}>
-                <Carousel
-                    ref={ref}
-                    width={width}
-                    height={width / 2}
-                    data={data}
-                    onProgressChange={progress}
-                    // renderItem={({ index }) => (
-                    //     <View
-                    //         style={{
-                    //             flex: 1,
-                    //             borderWidth: 1,
-                    //             justifyContent: "center",
-                    //         }}
-                    //     >
-                    //         <Text style={{ textAlign: "center", fontSize: 30 }}>{index}</Text>
-                    //     </View>
-                    // )}
-                    renderItem={({ item, index }) => (
-                        <View
-                            style={{
-                                flex: 1,
-                                justifyContent: "center",
-                                paddingHorizontal: 12,
-                            }}
-                        >
-                            <Image
-                                style={{ height: "100%", width: "100%", borderRadius: 12 }}
-                                source={item?.full_path}
-                            />
+                {/* Categories */}
+                <View
+                    style={[
+                        styles.normalFlex,
+                        {
+                            paddingHorizontal: 12,
+                            gap: 30,
+                            marginHorizontal: "auto",
+                            marginVertical: 14,
+                        },
+                    ]}
+                >
+                    {category?.map((item) => (
+                        <View key={item?.id} style={styles.categoryCard}>
+                            <Image style={{ height: "100%", width: 70 }} source={item?.full_path} />
+                            <Text style={styles.productText}>{item?.name}</Text>
                         </View>
-                    )}
-                />
-            </View>
+                    ))}
+                </View>
 
-            <View style={styles.productContainer}>
-                {products?.map((item, index) => (
-                    <View key={index} style={{ width: "28%", gap: 4 }}>
-                        <View key={index} style={styles.productCardImage}>
-                            <Image
-                                source={{ uri: item?.image }}
-                                style={{ height: "100%", width: "100%", padding: 12 }}
-                            />
+                {/* Carousels Banner */}
+                <View style={{ paddingVertical: 18 }}>
+                    <Carousel
+                        ref={ref}
+                        width={width}
+                        height={width / 2}
+                        data={data}
+                        onProgressChange={progress}
+                        // renderItem={({ index }) => (
+                        //     <View
+                        //         style={{
+                        //             flex: 1,
+                        //             borderWidth: 1,
+                        //             justifyContent: "center",
+                        //         }}
+                        //     >
+                        //         <Text style={{ textAlign: "center", fontSize: 30 }}>{index}</Text>
+                        //     </View>
+                        // )}
+                        renderItem={({ item, index }) => (
+                            <View
+                                style={{
+                                    flex: 1,
+                                    justifyContent: "center",
+                                    paddingHorizontal: 12,
+                                }}
+                            >
+                                <Image
+                                    style={{ height: "100%", width: "100%", borderRadius: 12 }}
+                                    source={item?.full_path}
+                                />
+                            </View>
+                        )}
+                    />
+                </View>
+
+                <View style={styles.productContainer}>
+                    {products?.map((item, index) => (
+                        <View key={index} style={{ width: "28%", gap: 4 }}>
+                            <View key={index} style={styles.productCardImage}>
+                                <Image
+                                    source={{ uri: item?.image }}
+                                    style={{ height: "100%", width: "100%", padding: 12 }}
+                                />
+                            </View>
+                            <Text style={styles.productTitle}>{item?.title?.slice(0, 12)}..</Text>
+                            <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
                         </View>
-                        <Text style={styles.productTitle}>{item?.title?.slice(0, 12)}..</Text>
-                        <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
-                    </View>
-                ))}
-            </View>
+                    ))}
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
