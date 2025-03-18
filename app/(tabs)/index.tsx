@@ -183,18 +183,29 @@ export default function HomeScreen() {
 
                 <View style={styles.productContainer}>
                     {products?.map((item, index) => (
-                        // <Link href={`/product/${item?.id}`} style={{ width: "28%", gap: 4 }}>
-                        <View key={index} style={{ width: "28%", gap: 4 }}>
+                        <Link
+                            key={index}
+                            href={`/product/${item?.id}`}
+                            style={{ width: "30%", height: 200 }}
+                        >
                             <View key={index} style={styles.productCardImage}>
                                 <Image
                                     source={{ uri: item?.image }}
-                                    style={{ height: "100%", width: "100%", padding: 12 }}
+                                    style={{
+                                        height: "100%",
+                                        width: "100%",
+                                        padding: 12,
+                                        objectFit: "contain",
+                                    }}
                                 />
                             </View>
-                            <Text style={styles.productTitle}>{item?.title?.slice(0, 12)}..</Text>
-                            <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
-                        </View>
-                        // </Link>
+                            <View style={{ gap: 4, padding: 6 }}>
+                                <Text style={styles.productTitle}>
+                                    {item?.title?.slice(0, 12)}..
+                                </Text>
+                                <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
+                            </View>
+                        </Link>
                     ))}
                 </View>
             </ScrollView>
@@ -236,11 +247,12 @@ const styles = StyleSheet.create({
     productContainer: {
         flexDirection: "row",
         flexWrap: "wrap",
-        gap: 12,
+        gap: 4,
         justifyContent: "space-evenly",
     },
     productCardImage: {
         height: 150,
+        width: "100%",
         borderRadius: 20,
         overflow: "hidden",
         backgroundColor: "white",
