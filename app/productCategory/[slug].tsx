@@ -25,8 +25,18 @@ export default function ProductCategory() {
             <View style={styles.productContainer}>
                 {products?.map((item, index) => (
                     <Link key={index} href={`/product/${item?.id}`} style={styles.productCard}>
-                        <View>
-                            <Image source={{ uri: item.image }} style={styles.productImage} />
+                        <View style={styles.productImageContainer}>
+                            <Image
+                                source={{ uri: item.image }}
+                                style={{
+                                    height: "100%",
+                                    width: "100%",
+                                    objectFit: "contain",
+                                    padding: 3,
+                                }}
+                            />
+                        </View>
+                        <View style={{ gap: 3, paddingTop: 4 }}>
                             <Text style={styles.productTitle}>{item?.title?.slice(0, 24)}..</Text>
                             <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
                         </View>
@@ -52,10 +62,9 @@ const styles = StyleSheet.create({
         gap: 4,
         // paddingVertical: 10,
     },
-    productImage: {
-        height: 240,
+    productImageContainer: {
+        height: 220,
         width: "100%",
-        objectFit: "contain",
         backgroundColor: "white",
         borderRadius: 12,
         padding: 12,
