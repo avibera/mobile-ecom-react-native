@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import React from "react";
 
 export default function ProductCategory() {
@@ -24,11 +24,13 @@ export default function ProductCategory() {
             </View>
             <View style={styles.productContainer}>
                 {products?.map((item, index) => (
-                    <View key={index} style={styles.productCard}>
-                        <Image source={{ uri: item.image }} style={styles.productImage} />
-                        <Text style={styles.productTitle}>{item?.title?.slice(0, 24)}..</Text>
-                        <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
-                    </View>
+                    <Link key={index} href={`/product/${item?.id}`} style={styles.productCard}>
+                        <View>
+                            <Image source={{ uri: item.image }} style={styles.productImage} />
+                            <Text style={styles.productTitle}>{item?.title?.slice(0, 24)}..</Text>
+                            <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
+                        </View>
+                    </Link>
                 ))}
             </View>
         </ScrollView>
