@@ -183,6 +183,7 @@ export default function HomeScreen() {
 
                 <View style={styles.productContainer}>
                     {products?.map((item, index) => (
+                        // <Link href={`/product/${item?.id}`} style={{ width: "28%", gap: 4 }}>
                         <View key={index} style={{ width: "28%", gap: 4 }}>
                             <View key={index} style={styles.productCardImage}>
                                 <Image
@@ -193,6 +194,7 @@ export default function HomeScreen() {
                             <Text style={styles.productTitle}>{item?.title?.slice(0, 12)}..</Text>
                             <Text style={{ fontWeight: "bold" }}>{item?.price}</Text>
                         </View>
+                        // </Link>
                     ))}
                 </View>
             </ScrollView>
